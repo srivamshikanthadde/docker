@@ -1,0 +1,41 @@
+apiVersion: skaffold/v2beta21
+kind: Config
+metadata:
+  name: docker
+build:
+  artifacts:
+  #- image: alpine
+    #context: nodeapp
+    #buildpacks:
+      #builder: gcr.io/buildpacks/builder:v1
+  #- image: nginx
+    #buildpacks:
+      #builder: gcr.io/buildpacks/builder:v1
+  - image: srivamshikanth/example-docker-app-1
+    context: nodeapp
+    sync:
+      #auto: true
+      manual:
+        - src: "nodeapp/index.html"
+          dest: "."
+    docker:
+      dockerfile: Dockerfile
+      buildArgs:
+        TEST: testing
+
+deploy:
+  kubectl:
+    manifests:
+    #- kube/deployment/my-nginx-deployment-1.yaml
+    #- kube/deployment/my-nginx-deployment-2.yaml
+    #- kube/deployment/my-nginx-volume-example-deployment-1.yaml
+    #- kube/deployment/my-node-example-deployment-1.yaml
+    - kube/deployment/my-nginx-configmap-example-deployment-1.yaml
+    #- kube/pod/nginx-pods-2.yaml
+    #- kube/pod/nginx-pods.yaml
+    #- kube/services/example-service-clusterIp-1.yaml
+    #- kube/services/example-service-loadbalancer-1.yaml
+    - kube/services/example-service-nodeport-1.yaml
+    #- kube/configmaps/env-props.yaml
+    - kube/configmaps/app-settings.yaml
+

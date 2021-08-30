@@ -1,0 +1,16 @@
+{
+  "name": "nodeapp-example-1",
+  "version": "1.0.0",
+  "description": "example-app-1",
+  "main": "index.js",
+  "scripts": {
+    "test": "print(\"hello world\")",
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^3.0.2"
+  }
+}

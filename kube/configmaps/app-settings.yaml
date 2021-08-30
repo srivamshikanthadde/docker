@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  enemies: aliens
+  enemies.cheat: "true"
+  enemies.cheat.level: noGoodRotten
+  lives: "3"
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2021-08-30T01:45:47Z"
+  name: app-settings
+  namespace: default
+  resourceVersion: "336170"
+  selfLink: /api/v1/namespaces/default/configmaps/app-settings
+  uid: 6e85c387-3eb1-4328-9562-6f7170182fa7

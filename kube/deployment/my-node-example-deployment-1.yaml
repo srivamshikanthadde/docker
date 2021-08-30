@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: my-node-deployment-1
+  name: my-node-deployment-1
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-node-deployment-1-frontend
+  template:
+    metadata:
+      labels:
+        app: my-node-deployment-1-frontend
+    spec:
+      containers:
+        - name: my-node-pod-1-frontend
+          image: srivamshikanth/example-docker-app-1:latest
+          env:
+            - name: ENVVAR
+              valueFrom:
+                configMapKeyRef:
+                  name: env-props
+                  key: env-var
+            - name: TITLE
+              value: " Node Deployment"
+            - name: HAPPY
+              valueFrom:
+                configMapKeyRef:
+                  key: happy
+                  name: env-props
+
+          ports:
+            - containerPort: 9080
+          resources:
+            limits:
+              memory: "128Mi" #128MB
+              cpu: "200m"
+

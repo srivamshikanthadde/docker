@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: my-node-volume-deployment-1
+  name: my-node-volume-deployment-1
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-node-deployment-1-frontend
+  template:
+    metadata:
+      labels:
+        app: my-node-deployment-1-frontend
+    spec:
+      volumes:
+        - name: html
+          emptyDir: {}
+        - name: app-config-volumes
+          configMap:
+            name: app-settings
+      containers:
+        - name: my-node-pod-1-frontend
+          image: nginx:alpine
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html
+              name: html
+              readOnly: true
+            - name: app-config-volumes
+              mountPath: /etc/config
+          resources:
+            limits:
+              memory: "128Mi" #128MB
+              cpu: "200m"
+

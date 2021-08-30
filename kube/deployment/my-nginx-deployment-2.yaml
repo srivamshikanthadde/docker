@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: myy-nginx-deployment-2
+  name: my-nginx-deployment-2
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myy-nginx-deployment-2-frontend
+  template:
+    metadata:
+      labels:
+        app: myy-nginx-deployment-2-frontend
+    spec:
+      containers:
+        - name: my-nginx-3
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "128Mi" #128MB
+              cpu: "200m"
